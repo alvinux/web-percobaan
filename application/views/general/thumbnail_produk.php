@@ -1,5 +1,4 @@
 <?php echo form_open('cart_control/add_cart_from_home');?>
-<?php print_r($hotlist) ?>
 <?php foreach ($datalist as $row) { ?>
 
 <div class="col-sm-4">

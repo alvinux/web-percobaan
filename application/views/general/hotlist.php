@@ -11,8 +11,9 @@
 
                     	<?php 
                         $datalist = $hotlist;
+                        $data['datalist'] = $datalist;
                          // print_r($datalist);
-                            $this->load->view('general/thumbnail_produk');
+                            $this->load->view('general/thumbnail_produk',$data);
                             ?>
                     	<!---------------1-------------->
                     
