@@ -35,7 +35,8 @@
                               <div class="row">
                                 <!--1-1-->
                                <?php 
-                               $this->load->view('general/thumbnail_produk');
+                               $data['datalist']= $new;
+                               $this->load->view('general/thumbnail_produk',$data);
                                ?>
                                <!---------------1-------------->
                               </div><!--/.row-->  
