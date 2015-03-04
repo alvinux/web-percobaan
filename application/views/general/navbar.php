@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">UKM PNPM</a>
+                <a class="navbar-brand" href="<?php echo base_url() ;?>">UKM PNPM</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-1" style="margin-left: 10px; margin-right: 10px;">
@@ -42,41 +42,21 @@
                     <li style="width: 10px; height: 1px;">
                         &nbsp;
                     </li>
-                    <li>
-                        <div class="btnav">
-                            <a href="#myModal" role="button" class="btn btn-large btn-success navbar-btn
-                            <?php 
-                                if (empty($getsession["id"]))
-                                {
-                                    echo "";
-                                }
-                                else
-                                {
-                                    echo "hidden";
-                                }
-
-                            ?>
-
-                            " data-toggle="modal">User Login</a>
-                           <!--  <a style="color: white;" class="btn btn-large btn-link navbar-btn" href="#"><i class=" icon-shopping-cart"></i></a>
-							 -->
-							<a id="chart" style="color: white;" data-original-title="Popover on bottom" href="#chart" class="btn btn-large btn-link navbar-btn" data-toggle="popover" data-placement="bottom" data-content="<h4>Chart Keranjang</h4>" title=""><i class=" icon-shopping-cart"></i></a>
-							
-							
-                        </div>
-                    </li>
-					<li class="btnav">
+                    <?php if ($this->session->userdata('login_user')) {?>
+                         <?php //echo $this->session->userdata('login_user');?>
+                    <li class="btnav">
                             <a class="btnav dropdown-toggle navbar-btn" href="#" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                <span><?php echo $this->session->userdata('login_user')['username_user'];?> <i class="caret"></i></span>
                             </a>
                             <ul style="width: 280px;" class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
-                                    <img src="http://localhost/acer/doc/themes/admin/img/avatar3.png" class="img-circle" alt="User Image">
+                                    <img src="<?php echo base_url('assets/img/photo/'.$this->session->userdata('login_user')['img_user']);?>" class="img-circle" alt="User Image">
+                                    <?php //echo base_url('assets/img/photo/'.$this->session->userdata('login_user')['img_user']);?>
                                     <p>
-                                        Jane Doe - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        <?php echo $this->session->userdata('login_user')['nama'];?><br>
+                                        <small><?php echo $this->session->userdata('login_user')['email'];?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -86,14 +66,36 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div style="padding: 10px;" class="pull-left">
-                                        <a class="btn btn-success btn-flat" href="#">Profile</a>
+                                        <a class="btn btn-success btn-flat" href="<?php echo site_url('home/profile_user'); ?>">Profile</a>
                                     </div>
                                     <div style="padding: 10px;" class="pull-right">
-                                        <a class="btn btn-danger btn-flat" href="#">Sign out</a>
+                                        <a class="btn btn-danger btn-flat" href="<?php echo site_url('proses/keluar_user'); ?>">Sign out</a>
                                     </div>
                                 </li>
+
                             </ul>
                         </li>
+                        <li>
+                        <div class="btnav">
+                            <a id="chart" style="color: white;" data-original-title="Popover on bottom" href="#chart" class="btn btn-large btn-link navbar-btn" data-toggle="popover" data-placement="bottom" data-content="<h4>Chart Keranjang</h4>" title=""><i class=" icon-shopping-cart"></i></a>
+                           
+                            
+                        </div>
+                    </li>   
+
+                    <?php  } else { ?>
+                    <li>
+                        <div class="btnav">
+                            <a href="#myModal" role="button" class="btn btn-large btn-success navbar-btn" data-toggle="modal">Login / Daftar</a>   
+                              
+                            
+                           <!--  <a style="color: white;" class="btn btn-large btn-link navbar-btn" href="#"><i class=" icon-shopping-cart"></i></a>
+                             -->
+                         
+                        </div>
+                    </li>                 
+                         
+                        <?php } ?>
                 </ul>
                 <!--                <button class="btn btn-large btn-success navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">Sign In</button>-->
             </div><!-- /.navbar-collapse -->

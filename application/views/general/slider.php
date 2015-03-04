@@ -6,18 +6,20 @@
                 <li data-target="#main-slider" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
+
                 <div class="item active" style="background-image: url(<?php echo base_url(); ?>doc/themes/public/images/slider/bg1.jpg)">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="carousel-content centered">
-                                    <h2 class="animation animated-item-1">Powerful and Responsive Web Design</h2>
-                                    <p class="animation animated-item-2">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                    <h2 class="animation animated-item-1">Selamat Datang</h2>
+                                    <p class="animation animated-item-2">Selamat datang di website pemasaran umkm pnpm mandiri kecamatan piyungan.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div><!--/.item-->
+                
                 <div class="item" style="background-image: url(<?php echo base_url(); ?>doc/themes/public/images/slider/bg2.jpg)">
                     <div class="container">
                         <div class="row">
