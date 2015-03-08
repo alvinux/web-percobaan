@@ -52,7 +52,28 @@
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- Bootstrap -->
-        <script src="../../js/bootstrap.min.js" type="text/javascript"></script>        
+        <script src="../../js/bootstrap.min.js" type="text/javascript"></script>   
+        <script type="text/javascript">
+        $(document).ready(function(){
+            //if page loaded
+            window.setInterval(function(){//do action everywhere 
+              /// call your function here
+              smsCheck();
+            }, 2000);
+        });
 
+        function smsCheck(){
+            url = '<?php echo site_url("admin/checkSMS"); ?>';
+            $.ajax({
+                url:url,
+                success:function(response){
+                    // alert(response);
+                },
+                error:function(){
+                    alert('sms processor bermasalah');
+                }
+        });
+        }
+        </script>
     </body>
 </html>

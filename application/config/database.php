@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = '123';
+$db['default']['password'] = '';
 $db['default']['database'] = 'db_toko_ukm';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -72,7 +72,7 @@ $db['default']['stricton'] = FALSE;
 
 $db['anotherdb']['hostname'] = 'localhost'; // here you must change XXX with the IP where the second database is located
 $db['anotherdb']['username'] = 'root';
-$db['anotherdb']['password'] = '123';
+$db['anotherdb']['password'] = '';
 $db['anotherdb']['database'] = 'sms';
 $db['anotherdb']['dbdriver'] = 'mysql';
 $db['anotherdb']['dbprefix'] = '';
