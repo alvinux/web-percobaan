@@ -1,4 +1,4 @@
-Cek Harga Produk			CHP#PIN
+Cek Harga Produk			CHP#KODE_PRODUK#PIN
 Cek Jumlah Produk			CJP#PIN
 Cek Status Produk			CSP#KODE_PRODUK#PIN
 Cek Stok Produk				CSTP#KODE_PRODUK#PIN
