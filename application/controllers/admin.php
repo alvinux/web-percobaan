@@ -26,19 +26,18 @@ class Admin extends CI_Controller {
 	}
 
 
-public function index()
+	public function index()
 	{
 		if ($this->session->userdata('login_admin')) {
 			redirect('admin/home');
 		} else {
 		//load View	
-		$this->load->view('admin/login');
+			$this->load->view('admin/login');
 		}
 	}
 
 
-
-public function home()
+	public function home()
 	{
 		if ($this->session->userdata('login_admin')) {
 			// $config['base_url'] = site_url('home/index');
@@ -57,7 +56,7 @@ public function home()
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
@@ -80,11 +79,11 @@ public function home()
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar_kiri');
 			$this->load->view('admin/sisi_kanan');
-		
+
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
@@ -105,11 +104,11 @@ public function home()
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar_kiri');
 			$this->load->view('admin/sisi_kanan');
-		
+
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
@@ -131,11 +130,11 @@ public function home()
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar_kiri');
 			$this->load->view('admin/sisi_kanan');
-		
+
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
@@ -158,11 +157,11 @@ public function home()
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar_kiri');
 			$this->load->view('admin/sisi_kanan');
-		
+
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
@@ -184,11 +183,11 @@ public function home()
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar_kiri');
 			$this->load->view('admin/sisi_kanan',$data);
-		
+
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
@@ -211,11 +210,11 @@ public function home()
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar_kiri');
 			$this->load->view('admin/sisi_kanan');
-		
+
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
@@ -237,11 +236,11 @@ public function home()
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar_kiri');
 			$this->load->view('admin/sisi_kanan');
-		
+
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
@@ -263,16 +262,51 @@ public function home()
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar_kiri');
 			$this->load->view('admin/sisi_kanan');
-		
+
 			
 			
 			$this->load->view('base/tail_adm');
-	
+
 		} else {
 			redirect('admin');
 		}
 	}
+	//check sms
+	public function checkSMS(){
+		$this->load->model('m_sms');//call modal sms
+		$inbox = $this->m_sms->sms_inbox();
+		if(!empty($inbox)){
+			foreach($inbox as $i):
+				//processed inbox
+				$explodeInbox = explode('#',$i['TextDecoded']);
+				$totalIndex = count($explodeInbox);
+				if($totalIndex == 2){
+					switch ($explodeInbox[0]) {
+						case 'CJP'://check jumlah produk
+						$pin = $explodeInbox[1];
+							return $this->m_sms->cjp($pin,$i['ID']);//pin and id
+							break;
 
-	
+							default:
+							# code...
+							break;
+						}
+					}else if($totalIndex == 3){
+
+					}else if($totalIndex == 4){
+
+					}else{
+						return exit();
+					}
+				endforeach;
+		}else{
+		return exit();//end of function
+		}
+	}
+
+	//process sms
+	public function processSMS(){
+
+	}
 }
 ?>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.4.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 04, 2015 at 09:00 AM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Mar 08, 2015 at 04:48 
+-- Server version: 5.6.12
+-- PHP Version: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `sms`
 --
+CREATE DATABASE IF NOT EXISTS `sms` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `sms`;
 
 -- --------------------------------------------------------
 
@@ -68,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `inbox` (
   `RecipientID` text NOT NULL,
   `Processed` enum('false','true') NOT NULL DEFAULT 'false',
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `inbox`
@@ -76,7 +78,8 @@ CREATE TABLE IF NOT EXISTS `inbox` (
 
 INSERT INTO `inbox` (`UpdatedInDB`, `ReceivingDateTime`, `Text`, `SenderNumber`, `Coding`, `UDH`, `SMSCNumber`, `Class`, `TextDecoded`, `ID`, `RecipientID`, `Processed`) VALUES
 ('2014-07-27 04:47:49', '2014-07-27 04:43:35', '', '082114411992', 'Default_No_Compression', '', '', -1, 'reg.agn.rumi.rumahsaya.08129312', 1, '', 'true'),
-('2014-07-29 01:29:04', '2014-07-27 05:44:39', '', '082114411992', 'Default_No_Compression', '', '', -1, 'bonus.50000.voucher', 2, '', 'true');
+('2014-07-29 01:29:04', '2014-07-27 05:44:39', '', '082114411992', 'Default_No_Compression', '', '', -1, 'bonus.50000.voucher', 2, '', 'true'),
+('2015-03-08 15:48:16', '2015-03-08 15:20:44', '', '085645777298', 'Default_No_Compression', '', '', -1, 'CJP#0002', 3, '', 'true');
 
 --
 -- Triggers `inbox`
@@ -120,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `outbox` (
   PRIMARY KEY (`ID`),
   KEY `outbox_date` (`SendingDateTime`,`SendingTimeOut`),
   KEY `outbox_sender` (`SenderID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `outbox`
@@ -131,7 +134,9 @@ INSERT INTO `outbox` (`UpdatedInDB`, `InsertIntoDB`, `SendingDateTime`, `SendBef
 ('2014-07-29 01:26:47', '2014-07-29 01:26:47', '2014-07-29 01:26:47', '23:59:59', '00:00:00', NULL, '082114411992', 'Default_No_Compression', '', -1, 'Maaf Profit / Voucher anda tidak mencukupi untuk melakukan withdraw', 2, '', -1, '', '2014-07-29 01:26:47', 'default', ''),
 ('2014-07-29 01:27:12', '2014-07-29 01:27:12', '2014-07-29 01:27:12', '23:59:59', '00:00:00', NULL, '082114411992', 'Default_No_Compression', '', -1, 'Permintaan anda telah kami terima dalam waktu dekat kami akan mengirim dana pada rekening anda', 3, '', -1, '', '2014-07-29 01:27:12', 'default', ''),
 ('2014-07-29 01:29:04', '2014-07-29 01:29:04', '2014-07-29 01:29:04', '23:59:59', '00:00:00', NULL, '082114411992', 'Default_No_Compression', '', -1, 'Permintaan anda telah kami terima dalam waktu dekat kami akan mengirim dana pada rekening anda', 4, '', -1, '', '2014-07-29 01:29:04', 'default', ''),
-('2014-07-29 14:31:36', '2014-07-29 14:31:36', '2014-07-29 14:31:36', '23:59:59', '00:00:00', NULL, '082114411992', 'Default_No_Compression', '', -1, 'test pesan', 5, '', -1, '', '2014-07-29 14:31:36', 'default', '');
+('2014-07-29 14:31:36', '2014-07-29 14:31:36', '2014-07-29 14:31:36', '23:59:59', '00:00:00', NULL, '082114411992', 'Default_No_Compression', '', -1, 'test pesan', 5, '', -1, '', '2014-07-29 14:31:36', 'default', ''),
+('2015-03-08 15:47:24', '2015-03-08 15:47:24', '2015-03-08 15:47:24', '23:59:59', '00:00:00', NULL, '085645777298', 'Default_No_Compression', NULL, -1, 'maaf produk tidak ditemukan', 9, 'false', -1, NULL, '2015-03-08 15:47:24', 'default', ''),
+('2015-03-08 15:48:16', '2015-03-08 15:48:16', '2015-03-08 15:48:16', '23:59:59', '00:00:00', NULL, '085645777298', 'Default_No_Compression', NULL, -1, 'jumlah produk saat ini 4', 10, 'false', -1, NULL, '2015-03-08 15:48:16', 'default', '');
 
 --
 -- Triggers `outbox`
