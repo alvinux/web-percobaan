@@ -5,7 +5,7 @@ class Admin extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(array('m_produk','m_admin','m_sms'));
+		$this->load->model(array('m_produk','m_admin','m_sms','m_user'));
 		$this->load->library(array('user_agent'));
 
 
@@ -278,20 +278,38 @@ class Admin extends CI_Controller {
 		if(!empty($inbox)){
 			foreach($inbox as $i):
 				//processed inbox
-				$explodeInbox = explode('#',$i['TextDecoded']);
+				$explodeInbox = explode('#',strtoupper($i['TextDecoded']));
 				$totalIndex = count($explodeInbox);
 				if($totalIndex == 2){
 					switch ($explodeInbox[0]) {
 						case 'CJP'://check jumlah produk
 						$pin = $explodeInbox[1];
-							return $this->m_sms->cjp($pin,$i['ID']);//pin and id
-							break;
-
-							default:
-							# code...
-							break;
+						$SenderNumber = $i['SenderNumber'];
+							if (!empty($this->m_user->tlpuser($i['SenderNumber']))) {
+								return $this->m_sms->cjp($pin,$i['ID'],$SenderNumber);//pin and id
+								break;
+							} else {
+								echo $i['SenderNumber'];
+								break;
+							}
+						default:
+						# code...
+						break;
 						}
+						
 					}else if($totalIndex == 3){
+						switch ($explodeInbox[0]) {
+							case 'CHP'://check jumlah produk
+							$kpr = $explodeInbox[1];
+							$pin = $explodeInbox[2];
+								return $this->m_sms->chp($pin,$kpr,$i['ID']);//pin and id
+								break;
+
+								default:
+								# code...
+								break;
+							}
+
 
 					}else if($totalIndex == 4){
 

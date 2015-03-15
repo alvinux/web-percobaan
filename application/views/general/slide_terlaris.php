@@ -18,23 +18,26 @@
                     $new = array();
                     $next = array();
                     $n=1;foreach ($terlaris as $row):
-                    if($n<=3):
+                    if($n<=4):
                         array_push($new, $row);
                     endif;
-                    if($n>3):
+                    if($n>4):
                         array_push($next, $row);
                     endif;
                     $n++;endforeach;?>
 
                    <!--------Item Active---->
-               
+
+                  
+
                             <!--------Item Active---->
                             <div class="item active">
                               <div class="row">
                                 <!--1-1-->
                                <?php 
-                               $data['datalist']= $new;
-                               $this->load->view('general/thumbnail_produk',$data);
+                               $data['datalist'] = $new;
+                        // print_r($hotlist);
+                               $this->load->view('general/thumbnail_produk', $data);
                                ?>
                                <!---------------1-------------->
                               </div><!--/.row-->  
@@ -45,11 +48,12 @@
                             <div class="item ">
                               <div class="row">
                                 <!--1-1-->
-                               <?php 
-                               $data['datalist']= $next;
-                               $this->load->view('general/thumbnail_produk',$data);
-                               ?>
-
+                               <!--thumbnail group-->
+                                 <?php 
+                                    $data['datalist'] = $next;
+                                    $this->load->view('general/thumbnail_produk', $data);
+                                  ?>
+                                
                               </div><!--/.row-->  
                             </div><!--/.item-->
                             

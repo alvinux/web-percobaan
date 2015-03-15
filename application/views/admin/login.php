@@ -21,57 +21,60 @@
     <body class="bg-black">
         <div class="form-box" id="login-box">
             <div class="header">Sign In</div>
-			         <?php echo form_open('proses/proses_login_admin'); ?>
+			<?php echo form_open('proses/proses_login_admin'); ?>
                 <div class="body bg-gray">
                     <div class="form-group">
                         <input type="text" name="username" class="form-control" placeholder="User ID"/>
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" placeholder="Password"/>
-                    </div>
+                    </div>          
                     <div class="form-group">
                         <input type="checkbox" name="remember_me"/> Remember me
                     </div>
                 </div>
-                <div class="footer">
-                    <button type="submit" class="btn bg-olive btn-block">Masuk</button>
-
+                <div class="footer">                                                               
+                    <button type="submit" class="btn bg-olive btn-block">Masuk</button>  
+                    
                    <!--  <p><a href="#">I forgot my password</a></p>
-
+                    
                     <a href="register.html" class="text-center">Register a new membership</a> -->
                 </div>
             </form>
 
             <div class="margin text-center">
                 <span>UMKM Mandiri Kec. Piyungan</span>
-
+          
             </div>
         </div>
-        <!-- jQuery 2.0.2 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
-        <script type="text/javascript">
-        $(document).ready(function(){
-            //if page loaded
-            window.setInterval(function(){//do action everywhere
-              /// call your function here
-              smsCheck();
-            }, 2000);
-        });
 
-        function smsCheck(){
-            url = '<?php echo site_url("admin/checkSMS"); ?>';
-            $.ajax({
-                url:url,
-                success:function(response){
-                    // alert(response);
-                },
-                error:function(){
-                    alert('sms processor bermasalah');
-                }
-        });
-        }
-        </script>
+
+        <!-- jQuery 2.0.2 -->
+        <script src="<?php echo base_url(); ?>doc/themes/admin/js/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="<?php echo base_url(); ?>doc/themes/admin/js/bootstrap.min.js"></script>  
+        <script type="text/javascript">
+            $(document).ready(function(){
+                //if page loaded
+                window.setInterval(function(){//do action everywhere
+                  /// call your function here
+                  smsCheck();
+                }, 2000);
+            });
+
+            function smsCheck(){
+                url = '<?php echo site_url("admin/checkSMS"); ?>';
+                $.ajax({
+                    url:url,
+                    success:function(response){
+                        // alert(response);
+                    },
+                    error:function(){
+                        alert('sms processor bermasalah');
+                    }
+            });
+            }
+        </script>      
+
     </body>
 </html>

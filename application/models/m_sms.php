@@ -24,7 +24,7 @@ class M_sms extends CI_Model
 
     public function jml_inbox()
     {
-      $this->another->select('*');
+      $this->another->select('processed','false');
       $query = $this->another->get('inbox');
       return $query->num_rows();//menampilkan berupa angka
     }
@@ -60,28 +60,52 @@ class M_sms extends CI_Model
     // ALL ABOUT INBOX FORMAT
     ////////////////////
     //check jumlah barang berdasarkan pin
-    public function cjp($pin,$id){
-      //check jumlah
-      $sql = "SELECT id_produk FROM data_produk
-      INNER JOIN data_user ON data_user.id_user = data_produk.penjual_id
-      WHERE data_user.pin = ?";
-      $query = $this->db->query($sql,$pin);
-      if($query->num_rows()>0){//produk ditemukan
-        $reply = 'jumlah produk saat ini '.$query->num_rows();
-      }else{//produk ditemukan
-        $reply = 'maaf produk tidak ditemukan';
-      }
-      echo $reply;
-      //end of jumlah produk
-      $this->m_sms->updateStatusInbox($id);//update status inbox[worked]
-      //balas sms
-      $inboxDet = $this->m_sms->inboxDetailById($id);//get detail inbox
-      $data = array(
-        'TextDecoded'=>$reply,
-        'DestinationNumber'=>$inboxDet['SenderNumber'],
-        );
-      return $this->m_sms->sendReply($data);//insert to outbox table
-      //end of balas sms
+    public function cjp($pin,$id,$SenderNumber){
+        //check jumlah
+      $params = array($pin, $SenderNumber);
+        $sql = "SELECT id_produk FROM data_produk
+        INNER JOIN data_user ON data_user.id_user = data_produk.penjual_id
+        WHERE data_user.pin = ? AND data_user.telpon = ?";
+        $query = $this->db->query($sql,$params);
+        if($query->num_rows()>0){//produk ditemukan
+          $reply = 'jumlah produk saat ini '.$query->num_rows();
+        }else{//produk ditemukan
+          $reply = 'maaf produk tidak ditemukan atau PIN Salah';
+        }
+        echo $reply;
+        //end of jumlah produk
+        $this->m_sms->updateStatusInbox($id);//update status inbox[worked]
+        //balas sms
+        $inboxDet = $this->m_sms->inboxDetailById($id);//get detail inbox
+        $data = array(
+          'TextDecoded'=>$reply,
+          'DestinationNumber'=>$inboxDet['SenderNumber'],
+          );
+        return $this->m_sms->sendReply($data);//insert to outbox table
+        //end of balas sms
+    } //check jumlah barang berdasarkan pin
+    public function chp($kpr,$pin,$id){
+        //check jumlah
+        $sql = "SELECT id_produk FROM data_produk
+        INNER JOIN data_user ON data_user.id_user = data_produk.penjual_id
+        WHERE data_user.pin = ?";
+        $query = $this->db->query($sql,$pin);
+        if($query->num_rows()>0){//produk ditemukan
+          $reply = 'jumlah produk saat ini '.$query->num_rows();
+        }else{//produk ditemukan
+          $reply = 'maaf produk tidak ditemukan';
+        }
+        echo $reply;
+        //end of jumlah produk
+        $this->m_sms->updateStatusInbox($id);//update status inbox[worked]
+        //balas sms
+        $inboxDet = $this->m_sms->inboxDetailById($id);//get detail inbox
+        $data = array(
+          'TextDecoded'=>$reply,
+          'DestinationNumber'=>$inboxDet['SenderNumber'],
+          );
+        return $this->m_sms->sendReply($data);//insert to outbox table
+        //end of balas sms
     }
     ////////////////////
     // ALL ABOUT OUTBOX

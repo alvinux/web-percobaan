@@ -10,8 +10,7 @@
                     <div class="row black">
 
                     	<?php 
-                        $datalist = $hotlist;
-                        $data['datalist'] = $datalist;
+                        $data['datalist'] = $hotlist;
                          // print_r($datalist);
                             $this->load->view('general/thumbnail_produk',$data);
                             ?>
